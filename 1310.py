@@ -1,4 +1,5 @@
 import vk_api
+import requests
 from vk_api.utils import get_random_id
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
 
@@ -10,10 +11,16 @@ for event in longpoll.listen():
     if event.type == VkBotEventType.MESSAGE_NEW:
         if event.obj.text != '': 
             if event.from_user:
-                if event.obj.text == "secret":
-                    reply = ":)"
-                else:
-                    reply = "))))"
+                str = event.obj.text.split(' ')
+                if str[0] == 'погода':
+                    city = input('Введите город:')
+                    res = requests.get("http://api.openweathermap.org/data/2.5/weather",
+                    params={'q': city, 'units': 'metric', 'lang': 'ru', 'APPID': 'ff804351b97f7a93823cbf829df18b62'})
+                    data = res.json()
+                    reply += "conditions:" + data['weather'][0]['description']
+                    reply +="temp:", data['main']['temp']
+                    reply +="temp_min:", data['main']['temp_min']
+                    reply +="temp_max:", data['main']['temp_max']
                 vk.messages.send(
                         user_id=event.obj.from_id,
                         random_id=get_random_id(),
