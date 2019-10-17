@@ -65,5 +65,5 @@ for event in longpoll.listen():
                         user_id=event.obj.from_id,
                         random_id=get_random_id(),
                         message=reply,
-                        keyboard=keyboard,
+                        #keyboard=keyboard,
                         attachment=att)

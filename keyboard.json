@@ -7,8 +7,8 @@
 					"label": "Погода Rostov-on-Don"
 				},
 				"color": "positive"
-			}],
-		[{
+			},
+		{
 				"action": {
 					"type": "text",
 					"label": "Погода Moscow"
