@@ -1,0 +1,19 @@
+﻿{
+	"one_time": false,
+	"buttons": [
+		[{
+				"action": {
+					"type": "text",
+					"label": "Погода Rostov-on-Don"
+				},
+				"color": "positive"
+			}],
+		[{
+				"action": {
+					"type": "text",
+					"label": "Погода Moscow"
+				},
+				"color": "positive"
+			}]
+	]
+}

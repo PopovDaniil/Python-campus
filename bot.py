@@ -1,4 +1,4 @@
-import vk_api, math, datetime, random
+ï»¿import vk_api, math, datetime, random
 import requests
 from vk_api.utils import get_random_id
 from vk_api.bot_longpoll import VkBotLongPoll, VkBotEventType
@@ -17,7 +17,7 @@ for event in longpoll.listen():
             if event.from_user:
                 text = event.obj.text.lower()
                 text = text.split(' ')
-                if (len (text) == 2 )and(text[0] == 'ïîãîäà'):
+                if (len(text) == 2) and (text[0] == "Ð¿Ð¾Ð³Ð¾Ð´Ð°"):
                     now = datetime.datetime.now()
                     city = text[1]
                     res = requests.get("http://api.openweathermap.org/data/2.5/weather",
@@ -25,24 +25,24 @@ for event in longpoll.listen():
                     data = res.json()
                     print(data)
                     if data['cod'] == '404':
-                        reply = "Òàêîãî ãîðîäà íå ñóùåñòâóåò"
+                        reply = "Ð¢Ð°ÐºÐ¾Ð³Ð¾ Ð³Ð¾Ñ€Ð¾Ð´Ð° Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚"
                         att = 'photo-187553815_457239027'
                     else:
                         descr = data['weather'][0]['description'].title()
-                        reply = "Ïîãîäíûå óñëîâèÿ: " + descr + '\n'
-                        if descr == "ßñíî":
+                        reply = "ÐŸÐ¾Ð³Ð¾Ð´Ð½Ñ‹Ðµ ÑƒÑÐ»Ð¾Ð²Ð¸Ñ: " + descr + '\n'
+                        if descr == "Ð¯ÑÐ½Ð¾":
                             if now.hour > 21:
                                 att = 'photo-187553815_457239021'
                             elif now.strftime('%a') == "Sun":
                                 att = random.choice(['photo-187553815_457239022','photo-187553815_457239023'])
                             else:
                                 att = 'photo-187553815_457239018'
-                        elif ((descr == "Ïàñìóðíî") or (descr == 'Ñëåãêà Îáëà÷íî')):
+                        elif ((descr == "ÐŸÐ°ÑÐ¼ÑƒÑ€Ð½Ð¾") or (descr == 'Ð¡Ð»ÐµÐ³ÐºÐ° ÐžÐ±Ð»Ð°Ñ‡Ð½Ð¾')):
                             if (now.hour > 16) and (now.hour < 20): 
                                 att = 'photo-187553815_457239020'
                             else:
                                 att = 'photo-187553815_457239019'
-                        elif ((descr == "Äîæäü") or (descr == 'Ëåãêèé Äîæäü')):
+                        elif ((descr == "Ð”Ð¾Ð¶Ð´ÑŒ") or (descr == 'Ð›ÐµÐ³ÐºÐ¸Ð¹ Ð”Ð¾Ð¶Ð´ÑŒ')):
                             if (now.hour > 8) and (now.hour < 18): 
                                 att = 'photo-187553815_457239017'
                             else:
@@ -55,11 +55,11 @@ for event in longpoll.listen():
                         else:
                             sign = '-'
                             
-                        reply += "Òåìïåðàòóðà: " + sign + str(round(data['main']['temp']))+ '\n'
-                        reply += "Âëàæíîñòü: " + str(data['main']['humidity']) + '%\n'
-                        reply += "Àòìîñôåðíîå äàâëåíèå " + str(round(data['main']['pressure']*0.750063755419211)) + ' ìì. ðò. ñò.'        
+                        reply += "Ð¢ÐµÐ¼Ð¿ÐµÑ€Ð°Ñ‚ÑƒÑ€Ð°: " + sign + str(round(data['main']['temp']))+ '\n'
+                        reply += "Ð’Ð»Ð°Ð¶Ð½Ð¾ÑÑ‚ÑŒ: " + str(data['main']['humidity']) + '%\n'
+                        reply += "ÐÑ‚Ð¼Ð¾ÑÑ„ÐµÑ€Ð½Ð¾Ðµ Ð´Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ " + str(round(data['main']['pressure']*0.750063755419211)) + ' Ð¼Ð¼. Ñ€Ñ‚. ÑÑ‚.'        
                 else:
-                    reply='Íåâåðíàÿ êîìàíäà'
+                    reply='ÐÐµÐ²ÐµÑ€Ð½Ð°Ñ ÐºÐ¾Ð¼Ð°Ð½Ð´Ð°'
                     att = 'photo-187553815_457239024'
                 vk.messages.send(
                         user_id=event.obj.from_id,
