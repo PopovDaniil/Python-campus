@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "задача-1310",
+      "appliesTo": "1310.py",
+      "type": "launch"
+    }
+  ]
+}
